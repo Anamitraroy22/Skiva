@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SKIVA Travel Design System - Cohesive Color Palette */
+@layer base {
+    :root {
+        /* Primary Brand Colors: Deep Teal & Golden Yellow */
+        --primary: 176 56% 13%; /* HSL for #0B3F3C (Deep Teal) */
+        --primary-foreground: 210 40% 98%; /* HSL for a very light off-white */
+        --primary-glow: 176 56% 25%; /* HSL for a slightly brighter teal for glow */
+
+        --accent: 38 88% 60%;  /* HSL for #F4B43E (Golden Yellow) */
+        --accent-foreground: 220 13% 9%; /* HSL for very dark text on accent */
+        --accent-glow: 38 88% 70%; /* HSL for a slightly brighter yellow for glow */
+
+        /* Background Colors: Soft Dark Blue-Grays and a Light Contrast */
+        --background: 207 29% 15.5%; /* HSL for #1C2833 (Default dark background) */
+        --background-light-section: 209 29% 22.5%; /* HSL for #293A4A (Slightly lighter dark for sections) */
+        --background-lighter-still: 198 13% 90%; /* HSL for #E0E7E9 (Very light, almost off-white for contrast sections) */
+
+        /* Foreground (Text) Colors: Designed for contrast on new backgrounds */
+        --foreground: 198 13% 90%; /* HSL for #E0E7E9 (Light text on dark backgrounds) */
+        --foreground-muted: 198 14% 71.6%; /* HSL for #AABBC3 (Muted light text on dark backgrounds) */
+        --dark-text: 176 56% 13%; /* HSL for #0B3F3C (Dark text on light backgrounds - same as primary) */
+
+        /* RGB values for drop-shadow filter (Crucial for icon glow) */
+        --primary-rgb: 11, 63, 60; /* RGB for #0B3F3C */
+        --accent-rgb: 244, 180, 62; /* RGB for #F4B43E */
+
+        /* UI Component Colors (adjusted to new palette for consistency) */
+        --border: 207 20% 25%; /* Border color for inputs, etc. */
+        --input: 207 29% 10%; /* Input field background */
+        --ring: var(--primary); /* Focus ring color */
+
+        --card: var(--glass-bg); /* Card background uses glass base */
+        --card-foreground: var(--foreground); /* Card text uses new foreground */
+        --popover: var(--glass-bg); /* Popover background uses glass base */
+        --popover-foreground: var(--foreground); /* Popover text uses new foreground */
+        --muted: 207 20% 20%; /* Muted background for some elements */
+        --muted-foreground: var(--foreground-muted); /* Muted text color */
+        --destructive: 0 84% 60%; /* Standard red for destructive actions */
+        --destructive-foreground: var(--foreground); /* Text color for destructive elements */
+
+        /* Glass Effect (adjusted to new palette for better visibility) */
+        --glass-bg: 207 29% 18%; /* Slightly lighter than --background for glass base */
+        --glass-border: 207 20% 30%; /* Adjusted glass border for new dark theme */
+
+        /* Gradients (updated to new palette for consistency) */
+        --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        --gradient-bg: linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-light-section)));
+        --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.6));
+
+        /* Shadows & Glows (adjusted to new palette for better effect) */
+        --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+        --shadow-accent: 0 0 20px hsl(var(--accent) / 0.4);
+        --shadow-glass: 0 8px 32px hsl(220 13% 0% / 0.3); /* Keep original dark shadow for depth */
+
+        /* Animations & Transitions (remain the same) */
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        /* Radius (remain the same) */
+        --radius: 1rem;
+    }
+}
+
+@layer components {
+    /* Glass Morphism Effect */
+    .glass {
+        background: hsl(var(--glass-bg) / 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid hsl(var(--glass-border) / 0.2);
+        box-shadow: var(--shadow-glass);
+    }
+
+    /* Glow Effects */
+    .glow-primary {
+        box-shadow: var(--shadow-glow);
+    }
+
+    .glow-accent {
+        box-shadow: var(--shadow-accent);
+    }
+
+    /* Gradient Backgrounds */
+    .bg-gradient-primary {
+        background: var(--gradient-primary);
+    }
+
+    .bg-gradient-hero {
+        background: var(--gradient-hero);
+    }
+
+    /* Typewriter Animation */
+    .typewriter {
+        overflow: hidden;
+        border-right: 2px solid hsl(var(--primary));
+        white-space: nowrap;
+        animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+    }
+
+    /* Floating Animation */
+    .float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    /* Card Hover Effects */
+    .card-hover {
+        transition: var(--transition-smooth);
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--shadow-accent);
+    }
+
+    /* Custom class for a light white text glow - now using the delicate version */
+    .text-glow-white-delicate {
+        text-shadow:
+            0 0 2px rgba(255, 255, 255, 0.3),
+            0 0 4px rgba(255, 255, 255, 0.2),
+            0 0 6px rgba(255, 255, 255, 0.1);
+    }
+
+    /* New explore-button class */
+    .explore-button {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        border-radius: 1rem;
+        box-shadow:
+            0 4px 0 hsl(var(--primary) / 0.8),
+            0 6px 20px hsl(var(--primary-glow) / 0.15);
+        transition: var(--transition-smooth);
+    }
+
+    .explore-button:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 6px 0 hsl(var(--primary) / 0.9),
+            0 8px 24px hsl(var(--primary-glow) / 0.25);
+    }
+
+    .explore-button:active {
+        transform: translateY(1px);
+        box-shadow:
+            0 2px 0 hsl(var(--primary) / 0.6),
+            0 4px 12px hsl(var(--primary-glow) / 0.1);
+    }
+
+    /* Swiper Pagination Dots (to lower them as requested) */
+    .myReviewSwiper .swiper-pagination-bullets {
+        bottom: -10px !important; /* Adjust this value to move dots further down */
+        padding-top: 20px; /* Add some padding above the dots */
+    }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: hsl(var(--primary)); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans;
+    }
+}

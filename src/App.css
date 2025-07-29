@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Futuristic Travel Design System */
+@layer base {
+    :root {
+        /* Futuristic Travel Color Palette */
+        --background: 220 13% 9%;
+        --foreground: 210 40% 98%;
+        --background-light: 220 15% 12%;
+        --foreground-muted: 215 20% 70%;
+
+        /* Primary - Cyber Yellow */
+        --primary: 53 100% 64%;
+        --primary-foreground: 220 13% 9%;
+        --primary-glow: 53 100% 75%;
+
+        /* Secondary - Midnight Blue */
+        --secondary: 218 84% 25%;
+        --secondary-foreground: 210 40% 98%;
+        --secondary-dark: 218 84% 15%;
+
+        /* Accent Colors */
+        --accent: 200 100% 60%;
+        --accent-foreground: 220 13% 9%;
+        --accent-glow: 200 100% 70%;
+
+        /* Glass Effect */
+        --glass-bg: 220 13% 15%;
+        --glass-border: 220 20% 25%;
+
+        /* Gradients */
+        --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+        --gradient-bg: linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-light)));
+        --gradient-hero: linear-gradient(135deg, hsl(var(--secondary-dark) / 0.8), hsl(var(--accent) / 0.6));
+
+        /* Shadows & Glows */
+        --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+        --shadow-accent: 0 0 20px hsl(var(--accent) / 0.4);
+        --shadow-glass: 0 8px 32px hsl(220 13% 0% / 0.3);
+
+        /* Animations */
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        /* UI Component Colors */
+        --card: var(--glass-bg);
+        --card-foreground: 210 40% 98%;
+        --popover: var(--glass-bg);
+        --popover-foreground: 210 40% 98%;
+        --muted: 220 15% 20%;
+        --muted-foreground: 215 20% 70%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 210 40% 98%;
+        --border: var(--glass-border);
+        --input: var(--glass-bg);
+        --ring: var(--primary);
+        --radius: 1rem;
+    }
+}
+
+@layer components {
+    /* Glass Morphism Effect */
+    .glass {
+        background: hsl(var(--glass-bg) / 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid hsl(var(--glass-border) / 0.2);
+        box-shadow: var(--shadow-glass);
+    }
+
+    /* Glow Effects */
+    .glow-primary {
+        box-shadow: var(--shadow-glow);
+    }
+
+    .glow-accent {
+        box-shadow: var(--shadow-accent);
+    }
+
+    /* Gradient Backgrounds */
+    .bg-gradient-primary {
+        background: var(--gradient-primary);
+    }
+
+    .bg-gradient-hero {
+        background: var(--gradient-hero);
+    }
+
+    /* Typewriter Animation */
+    .typewriter {
+        overflow: hidden;
+        border-right: 2px solid hsl(var(--primary));
+        white-space: nowrap;
+        animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+    }
+
+    /* Floating Animation */
+    .float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    /* Card Hover Effects */
+    .card-hover {
+        transition: var(--transition-smooth);
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--shadow-accent);
+    }
+
+    /* Custom class for Shimmer Effect on text - Reverted to original white shimmer */
+    .text-shimmer-effect {
+        /* Define the white gradient that will "shimmer" */
+        background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,1) 70%, rgba(255,255,255,0.8) 100%);
+        background-size: 200% 100%; /* Make the background wider than the text */
+
+        /* These properties clip the background to the shape of the text */
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        /* Make the actual text color transparent so the background gradient shows through */
+        -webkit-text-fill-color: transparent;
+        color: transparent; /* Fallback for non-webkit browsers */
+
+        /* Removed position: relative, overflow: hidden and pseudo-element styles */
+        /* as they are not needed for this white shimmer approach */
+    }
+
+    /* Pseudo-element for the shimmer overlay has been removed */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: hsl(var(--primary)); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans;
+    }
+}
