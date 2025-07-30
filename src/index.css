@@ -7,14 +7,14 @@
 /* SKIVA Travel Design System - Cohesive Color Palette */
 @layer base {
     :root {
-        /* Primary Brand Colors: Deep Teal & Golden Yellow */
-        --primary: 176 56% 13%; /* HSL for #0B3F3C (Deep Teal) */
-        --primary-foreground: 210 40% 98%; /* HSL for a very light off-white */
-        --primary-glow: 176 56% 25%; /* HSL for a slightly brighter teal for glow */
+        /* Primary Brand Colors: Golden Yellow & Complementary Darker Golden */
+        --primary: 38 88% 60%; /* HSL for #F4B43E (Golden Yellow - now the main primary) */
+        --primary-foreground: 220 13% 9%; /* HSL for a very light off-white */
+        --primary-glow: 38 88% 70%; /* HSL for a slightly brighter golden for glow */
 
-        --accent: 38 88% 60%;  /* HSL for #F4B43E (Golden Yellow) */
-        --accent-foreground: 220 13% 9%; /* HSL for very dark text on accent */
-        --accent-glow: 38 88% 70%; /* HSL for a slightly brighter yellow for glow */
+        --accent: 38 70% 45%;  /* HSL for a slightly darker, richer golden (new accent) */
+        --accent-foreground: 220 13% 9%; /* HSL for very dark text on darker golden */
+        --accent-glow: 38 70% 55%; /* HSL for a brighter version of the new accent */
 
         /* Background Colors: Soft Dark Blue-Grays and a Light Contrast */
         --background: 207 29% 15.5%; /* HSL for #1C2833 (Default dark background) */
@@ -24,16 +24,16 @@
         /* Foreground (Text) Colors: Designed for contrast on new backgrounds */
         --foreground: 198 13% 90%; /* HSL for #E0E7E9 (Light text on dark backgrounds) */
         --foreground-muted: 198 14% 71.6%; /* HSL for #AABBC3 (Muted light text on dark backgrounds) */
-        --dark-text: 176 56% 13%; /* HSL for #0B3F3C (Dark text on light backgrounds - same as primary) */
+        --dark-text: 220 13% 9%; /* HSL for #1C202C (Very dark text, good for light backgrounds, same as accent-foreground) */
 
         /* RGB values for drop-shadow filter (Crucial for icon glow) */
-        --primary-rgb: 11, 63, 60; /* RGB for #0B3F3C */
-        --accent-rgb: 244, 180, 62; /* RGB for #F4B43E */
+        --primary-rgb: 244, 180, 62; /* RGB for #F4B43E */
+        --accent-rgb: 190, 140, 50; /* RGB for the new darker golden accent */
 
         /* UI Component Colors (adjusted to new palette for consistency) */
         --border: 207 20% 25%; /* Border color for inputs, etc. */
         --input: 207 29% 10%; /* Input field background */
-        --ring: var(--primary); /* Focus ring color */
+        --ring: var(--primary); /* Focus ring color remains primary (now golden) */
 
         --card: var(--glass-bg); /* Card background uses glass base */
         --card-foreground: var(--foreground); /* Card text uses new foreground */
@@ -127,20 +127,24 @@
 
     /* New explore-button class */
     .explore-button {
-        background: hsl(var(--primary));
-        color: hsl(var(--primary-foreground));
+        background: hsl(var(--primary)); /* Golden background */
+        color: hsl(var(--primary-foreground)); /* Dark text */
         border-radius: 1rem;
         box-shadow:
             0 4px 0 hsl(var(--primary) / 0.8),
             0 6px 20px hsl(var(--primary-glow) / 0.15);
         transition: var(--transition-smooth);
+        animation: pulse-glow 2s infinite alternate; /* ADDED: Apply the new animation */
     }
 
     .explore-button:hover {
+        background: hsl(var(--accent)); /* Change to accent golden on hover */
+        color: hsl(var(--accent-foreground)); /* Text color for accent background */
         transform: translateY(-2px);
         box-shadow:
-            0 6px 0 hsl(var(--primary) / 0.9),
-            0 8px 24px hsl(var(--primary-glow) / 0.25);
+            0 6px 0 hsl(var(--accent) / 0.9), /* Adjusted shadow to accent */
+            0 8px 24px hsl(var(--accent-glow) / 0.25); /* Adjusted glow to accent */
+        animation: none; /* Pause animation on hover for better interaction */
     }
 
     .explore-button:active {
@@ -148,12 +152,18 @@
         box-shadow:
             0 2px 0 hsl(var(--primary) / 0.6),
             0 4px 12px hsl(var(--primary-glow) / 0.1);
+        animation: none; /* Pause animation on active for better interaction */
     }
 
     /* Swiper Pagination Dots (to lower them as requested) */
     .myReviewSwiper .swiper-pagination-bullets {
         bottom: -10px !important; /* Adjust this value to move dots further down */
         padding-top: 20px; /* Add some padding above the dots */
+    }
+
+    /* ADDED: will-change utility class for performance optimization */
+    .will-change-transform-opacity {
+        will-change: transform, opacity;
     }
 }
 
@@ -171,6 +181,26 @@
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
 }
+
+/* ADDED: New keyframes for the pulse-glow animation */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 4px 0 hsl(var(--primary) / 0.8),
+                    0 6px 20px hsl(var(--primary-glow) / 0.15);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 6px 0 hsl(var(--primary) / 0.9),
+                    0 8px 30px hsl(var(--primary-glow) / 0.4); /* More intense glow */
+        transform: scale(1.02); /* Slightly scale up */
+    }
+    100% {
+        box-shadow: 0 4px 0 hsl(var(--primary) / 0.8),
+                    0 6px 20px hsl(var(--primary-glow) / 0.15);
+        transform: scale(1); /* Ensure it returns to original scale */
+    }
+}
+
 
 @layer base {
     * {

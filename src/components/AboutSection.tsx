@@ -141,12 +141,11 @@ const ReviewCard = ({ review }: { review: CustomerReview }) => (
                         key={i}
                         className={`w-5 h-5 ${
                             i < Math.floor(review.rating)
-                                ? 'text-yellow-400 fill-current' // Full star - using a direct yellow for clarity
-                                : 'text-gray-300' // Empty star
+                                ? 'text-yellow-400 fill-current'
+                                : 'text-gray-300'
                         }`}
                     />
                 ))}
-                {/* Render a half star if rating is not an integer */}
                 {review.rating % 1 !== 0 && (
                     <div className="absolute top-0 left-0 overflow-hidden" style={{ width: `${(review.rating % 1) * 100}%` }}>
                         <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -191,10 +190,14 @@ const AboutSection = () => {
     ];
 
     return (
-        <section className="py-20 relative overflow-hidden"> {/* Background controlled by Index.tsx */}
-            <div className="container mx-auto px-6">
+        // The section itself no longer has a solid background. It relies on the parent's SVG background.
+        <section className="py-20 relative overflow-hidden">
+            {/* Semi-transparent overlay to provide a slight tint over the SVG background */}
+            {/* This div covers the entire section and applies the background-light-section color with opacity */}
+            <div className="absolute inset-0 bg-background-light-section/80 -z-10"></div> {/* ADDED THIS OVERLAY */}
+
+            <div className="container mx-auto px-6 relative z-10"> {/* ADDED relative z-10 */}
                 <div className="text-center mb-16 animate-fade-in">
-                    {/* Text colors here are already correct based on Index.tsx's bg-background-light-section and text-foreground */}
                     <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
                         About Our <span className="bg-gradient-primary bg-clip-text text-transparent">Journey</span>
                     </h2>
@@ -217,9 +220,7 @@ const AboutSection = () => {
                                           filter drop-shadow-[0_0_5px_rgba(var(--primary-rgb),0.5)] group-hover:drop-shadow-[0_0_8px_rgba(var(--accent-rgb),0.7)]">
                                 {feature.icon}
                             </div>
-                            {/* Title: Uses text-foreground for strong contrast */}
                             <h3 className="text-xl font-semibold mb-3 text-foreground">{feature.title}</h3>
-                            {/* Description: Uses text-foreground-muted for softer contrast */}
                             <p className="text-foreground-muted">{feature.description}</p>
                         </div>
                     ))}
@@ -227,19 +228,18 @@ const AboutSection = () => {
 
                 {/* Customer Reviews Section - New Carousel */}
                 <div className="mb-20">
-                    {/* Text colors here are already correct based on Index.tsx's bg-background-light-section and text-foreground */}
                     <h3 className="text-3xl font-bold text-center mb-12 text-foreground">What Our Travelers Say</h3>
                     <Swiper
                         modules={[Autoplay, Pagination]}
-                        loop={true} // Infinite loop
+                        loop={true}
                         autoplay={{
-                            delay: 1000, // 1-second interval
-                            disableOnInteraction: false, // Keep autoplaying even after user interaction
+                            delay: 1000,
+                            disableOnInteraction: false,
                         }}
-                        spaceBetween={24} // Gap between cards
-                        slidesPerView={1} // Default: 1 card on small screens
-                        pagination={{ clickable: true }} // Dots indicator
-                        breakpoints={{ // Responsive settings for 3 or 4 cards
+                        spaceBetween={24}
+                        slidesPerView={1}
+                        pagination={{ clickable: true }}
+                        breakpoints={{
                             640: {
                                 slidesPerView: 2,
                                 spaceBetween: 20,
@@ -248,12 +248,12 @@ const AboutSection = () => {
                                 slidesPerView: 3,
                                 spaceBetween: 24,
                             },
-                            1280: { // Optional: for very large screens, show 4
+                            1280: {
                                 slidesPerView: 4,
                                 spaceBetween: 24,
                             },
                         }}
-                        className="myReviewSwiper" // Class for custom styling (CSS for this is in index.css)
+                        className="myReviewSwiper"
                     >
                         {customerReviews.map((review) => (
                             <SwiperSlide key={review.id}>

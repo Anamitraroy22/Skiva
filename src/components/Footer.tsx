@@ -70,7 +70,7 @@ export const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center mt-4 text-xs text-gray-600 py-2"> {/* Reduced mt-6 to mt-4, added py-2 */}
-          Copyright © {new Date().getFullYear()}, skiva.ai.com. All Rights Reserved. <br />
+          Copyright © {new Date().getFullYear()}, skiva.travel.com. All Rights Reserved. <br />
           Developed by ⭐ Anamitra Roy for Techno India University.
         </div>
       </div>

@@ -20,7 +20,14 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      // --- NEW: Add backgroundImage property here ---
+      backgroundImage: {
+        'tech-lines': "url('/assets/tech-lines.svg')",
+      },
       colors: {
+        // --- NEW: Add site-bg color here ---
+        'site-bg': '#010D05', // This is a very dark, almost black, green-ish background
+
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

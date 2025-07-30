@@ -4,19 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const phrases = [
-  { text: "Explore. Dream. Discover.", color: "text-pink-400", fontClass: "font-playfair" },
-  { text: "Relax. Refresh. Reconnect.", color: "text-blue-400", fontClass: "font-raleway" },
-  { text: "Wander. Wonder. Wow.", color: "text-yellow-400", fontClass: "font-poppins" },
-  { text: "Adventure. Awaits. Always.", color: "text-green-400", fontClass: "font-playfair" },
-  { text: "Plan. Pack. Go.", color: "text-orange-400", fontClass: "font-poppins" },
-  { text: "Fly. Roam. Repeat.", color: "text-purple-400", fontClass: "font-raleway" },
-  { text: "Breathe. Travel. Live.", color: "text-teal-400", fontClass: "font-playfair" },
-  { text: "Escape. Explore. Experience.", color: "text-red-400", fontClass: "font-raleway" },
-  { text: "Sail. Surf. Soar.", color: "text-cyan-400", fontClass: "font-poppins" },
-  { text: "Go. See. Smile.", color: "text-amber-400", fontClass: "font-playfair" },
+  { text: "Explore. Dream. Discover.", color: "text-primary", fontClass: "font-playfair" }, // Using text-primary for golden
+  { text: "Relax. Refresh. Reconnect.", color: "text-accent", fontClass: "font-raleway" },   // Using text-accent for darker golden
+  { text: "Wander. Wonder. Wow.", color: "text-primary", fontClass: "font-poppins" },
+  { text: "Adventure. Awaits. Always.", color: "text-accent", fontClass: "font-playfair" },
+  { text: "Plan. Pack. Go.", color: "text-primary", fontClass: "font-poppins" },
+  { text: "Fly. Roam. Repeat.", color: "text-accent", fontClass: "font-raleway" },
+  { text: "Breathe. Travel. Live.", color: "text-primary", fontClass: "font-playfair" },
+  { text: "Escape. Explore. Experience.", color: "text-accent", fontClass: "font-raleway" },
+  { text: "Sail. Surf. Soar.", color: "text-primary", fontClass: "font-poppins" },
+  { text: "Go. See. Smile.", color: "text-accent", fontClass: "font-playfair" },
 ];
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onGetTravelGuideClick: () => void; // New prop for handling "Get Travel Guide" button click
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onGetTravelGuideClick }) => {
   const [typewriterText, setTypewriterText] = useState("");
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
 
@@ -39,6 +43,14 @@ const HeroSection = () => {
     return () => clearInterval(typeInterval);
   }, [currentPhraseIndex]);
 
+  // Function to handle scrolling to the TripGuideSection
+  const scrollToTrips = () => {
+    const tripsSection = document.getElementById('trips');
+    if (tripsSection) {
+      tripsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -53,8 +65,8 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 flex justify-center items-center gap-2 text-white text-glow-white-delicate">
-        Your Next Great Adventure Starts Here
-        </h1>
+            Your Next Great Adventure Starts Here
+          </h1>
 
           {/* Typewriter Text */}
           <div className="text-xl md:text-2xl mb-8 h-10 font-light">
@@ -71,14 +83,18 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button
-              variant="ghost"
               size="xl"
               className="explore-button flex items-center justify-center gap-2 text-lg sm:text-xl px-6 py-3 font-semibold tracking-wide transition-transform transform active:translate-y-1"
+              onClick={scrollToTrips}
             >
               <MapPin className="w-5 h-5" />
               Explore Trips
             </Button>
-            <Button variant="glass" size="xl">
+            <Button
+              variant="glass"
+              size="xl"
+              onClick={onGetTravelGuideClick} // ADDED: onClick handler to trigger the modal
+            >
               <CalendarDays className="w-5 h-5 mr-2" />
               Get Travel Guide
             </Button>
@@ -121,7 +137,7 @@ const HeroSection = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full py-3 px-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition"
+                  className="w-full py-3 px-4 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition"
                 >
                   <Search className="w-5 h-5 mr-2" />
                   Search
