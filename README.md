@@ -22,10 +22,10 @@ https://skiva.vercel.app/
 Section	Preview (File Name)	Description
 Home (Hero)	![home-example.png](public/assets/screenshots/home-example.png)	Starfield background, animated typewriter intro, and CTA search bar
 About	![about-example.png](public/assets/screenshots/about-example.png)	Glassmorphic content showcasing values and customer testimonials
-Trip Guides	![destination-example.png](/assets/screenshots/destination-example.png)	Swiper carousel of trip cards with glowing golden borders
-Trip Details Modal	![destinationdetails-example.png](/assets/screenshots/destinationdetails-example.png)	Interactive modal with trip descriptions, pricing tiers, and highlights
-Contact	![contact-example.png](/assets/screenshots/contact-example.png)	Elegant contact form with glow effects, powered by Formspree
-Login / Signup	![login-signup.png](/assets/screenshots/login-signup.png)	Glassmorphic modals for user authentication (signup & login)                         |
+Trip Guides	![destination-example.png](public/assets/screenshots/destination-example.png)	Swiper carousel of trip cards with glowing golden borders
+Trip Details Modal	![destinationdetails-example.png](public/assets/screenshots/destinationdetails-example.png)	Interactive modal with trip descriptions, pricing tiers, and highlights
+Contact	![contact-example.png](public/assets/screenshots/contact-example.png)	Elegant contact form with glow effects, powered by Formspree
+Login / Signup	![login-signup.png](public/assets/screenshots/login-signup.png)	Glassmorphic modals for user authentication (signup & login)                         |
 
 
 
